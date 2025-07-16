@@ -25,9 +25,9 @@ public class ImageReaderService {
      * Takes a MultipartFile and tries to do an OCR operation with it, if it is a supported file type.
      * @param userFile the MultipartFile uploaded by the user
      * @return the OCR text output
-     * @throws IOException
-     * @throws TesseractException
-     * @throws UnsupportedFileException
+     * @throws IOException when createTempFile(MultipartFile file) is called and throws this exception
+     * @throws TesseractException when doing the OCR operation via Tess4J
+     * @throws UnsupportedFileException if the file does not have a supported file type.
      */
     public String processImageFile(MultipartFile userFile) throws IOException, TesseractException, UnsupportedFileException {
 
@@ -67,7 +67,7 @@ public class ImageReaderService {
      * Creates a temporary file using another and returns it.
      * @param userFile the file to be used to create the temporary
      * @return the temporary file created
-     * @throws IOException
+     * @throws IOException when creating the temporary file
      */
     private File createTempFile(MultipartFile userFile) throws IOException {
         String suffix = getSuffix(Objects.requireNonNull(userFile.getOriginalFilename()));

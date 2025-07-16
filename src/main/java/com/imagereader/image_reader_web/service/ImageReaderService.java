@@ -21,6 +21,14 @@ public class ImageReaderService {
         TesseractSetupService.setUpTesseract(tesseract);
     }
 
+    /**
+     * Takes a MultipartFile and tries to do an OCR operation with it, if it is a supported file type.
+     * @param userFile the MultipartFile uploaded by the user
+     * @return the OCR text output
+     * @throws IOException
+     * @throws TesseractException
+     * @throws UnsupportedFileException
+     */
     public String processImageFile(MultipartFile userFile) throws IOException, TesseractException, UnsupportedFileException {
 
         if (!isSupportedFile(userFile)){
@@ -41,6 +49,13 @@ public class ImageReaderService {
         return result;
     }
 
+    /**
+     * Verifies if the type of the file is supported.
+     * <p>Supported file types: {@code .png}, {@code .jpg}, {@code .jpeg}, {@code .tif}.</p>
+     *
+     * @param userFile the file uploaded
+     * @return boolean
+     */
     private boolean isSupportedFile(MultipartFile userFile){
         String lower = Objects.requireNonNull(userFile.getOriginalFilename()).toLowerCase();
 
@@ -48,11 +63,22 @@ public class ImageReaderService {
         return lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".tif");
     }
 
+    /**
+     * Creates a temporary file using another and returns it.
+     * @param userFile the file to be used to create the temporary
+     * @return the temporary file created
+     * @throws IOException
+     */
     private File createTempFile(MultipartFile userFile) throws IOException {
         String suffix = getSuffix(Objects.requireNonNull(userFile.getOriginalFilename()));
         return File.createTempFile("ocr_", suffix);
     }
 
+    /**
+     * Gets the suffix of the file (last one)
+     * @param originalFilename the filename
+     * @return the suffix (file extension)
+     */
     private String getSuffix(String originalFilename) {
         return originalFilename.substring(originalFilename.lastIndexOf('.'));
     }

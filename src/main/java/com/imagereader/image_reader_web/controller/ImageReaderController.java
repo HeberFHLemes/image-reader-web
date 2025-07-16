@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/")
 public class ImageReaderController {
 
     @Autowired
     ImageReaderService imageReaderService;
 
-    @GetMapping
+    @GetMapping("/")
     public String welcome(Model model){
 
         // Show "welcome message" and user input options
@@ -22,11 +21,20 @@ public class ImageReaderController {
 
     }
 
-    @PostMapping
+    /**
+     * Upload image file via post method.
+     * Calls the service that will process/validate the file,
+     * adds the respective model attributes, and then returns the respective template.
+     * @param file the MultipartFile uploaded by the user
+     * @param model the Model to have the attributes updated
+     * @return the updated template
+     */
+    @PostMapping("/upload")
     public String sendImageFile(@RequestParam("file") MultipartFile file, Model model){
 
         // Receive Image File from user and send to the service that will process it
-        try{
+        try {
+            // Calls the method that do the OCR operation after file validation
             String text = imageReaderService.processImageFile(file);
 
             model.addAttribute("ocrTextOutput", text);
@@ -35,9 +43,19 @@ public class ImageReaderController {
             model.addAttribute("ocrTextOutput", "Error: " + e.getMessage());
         }
 
-        // return text read from image (here or in another method).
+        // adds an information for the user - what file was submitted
         model.addAttribute("message", "File uploaded: " + file.getOriginalFilename());
 
         return "index";
+    }
+
+    /**
+     * Helper mapping - refreshes the page redirecting to "/",
+     * useful after file submission.
+     * @return redirect to root
+     */
+    @PostMapping("/refresh")
+    public String refreshPage(){
+        return "redirect:/";
     }
 }

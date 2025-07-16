@@ -1,6 +1,6 @@
 // Function to update the textarea inner html
 // with the text read from the image uploaded
-function updateResponseFragment(){
+/*function updateResponseFragment(){
 
     document.getElementById('inputForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -17,4 +17,4 @@ function updateResponseFragment(){
             document.getElementById('responseTextArea').innerHTML = html;
         });
     });
-}
+}*/

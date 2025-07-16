@@ -1,0 +1,7 @@
+<div th:fragment="responseFragment" id="responseTextAreaContainer" class="container-fluid"
+     xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${ocrTextOutput != null}">
+        <label for="responseTextArea">Text Output</label>
+        <textarea id="responseTextArea" rows="10" cols="50" th:text="${ocrTextOutput}"></textarea>
+    </div>
+</div>

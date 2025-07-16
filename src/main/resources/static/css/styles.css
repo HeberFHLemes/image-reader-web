@@ -1,0 +1,29 @@
+body {
+    text-align: center;
+}
+div, form {
+    width: 40%;
+    margin: auto;
+}
+
+#welcomeDiv {
+    margin-top: 10%;
+}
+
+#welcomeDiv > h5 {
+    margin-top: 20px;
+}
+
+#inputForm {
+    margin-top: 2%;
+}
+
+#result-container {
+    margin-top: 5%;
+}
+
+textarea {
+    height: auto;
+    width: 100%;
+}
+

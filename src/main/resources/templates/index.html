@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/static/css/styles.css}" href="/static/css/styles.css">
+    <script th:src="@{/static/js/script.js}" src="/static/js/script.js" defer></script>
+    <title>Image Reader</title>
+</head>
+<body>
+    <div id="welcomeDiv" class="container-fluid">
+        <h1>Welcome to Image Reader!</h1>
+        <h5>Send an image file to the input below and it will return the text read from it</h5>
+    </div>
+
+    <form id="inputForm" th:action="@{/upload}" th:method="post" th:enctype="'multipart/form-data'">
+        <div id="inputDiv" class="input-group mb-3">
+            <!--<label class="input-group-text" for="inputFile">Upload</label>-->
+            <input type="file" name="file" class="form-control"  th:accept="'image/*'" id="inputFile">
+            <button class="btn btn-primary" type="submit" id="submitUserInputButton">Upload</button>
+        </div>
+    </form>
+
+    <div th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div id="result-container">
+        <div th:replace="::responseFragment"></div>
+    </div>
+
+    <div th:fragment="responseFragment" id="responseTextAreaContainer" class="container-fluid">
+        <div th:if="${ocrTextOutput != null}">
+            <label for="responseTextArea">
+                Output Text
+            </label>
+            <textarea id="responseTextArea" th:text="${ocrTextOutput}">
+            </textarea>
+        </div>
+    </div>
+</body>
+</html>

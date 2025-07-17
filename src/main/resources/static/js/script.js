@@ -12,6 +12,6 @@
         }).then(response => response.text()).then(text => {
             document.getElementById('responseTextArea').textContent = text;
         });
-        document.getElementById('responseTextArea').style.display = "block";*/
+        document.getElementById('responseTextArea').style.display = "block";
     });
 }*/

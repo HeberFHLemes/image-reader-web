@@ -14,11 +14,7 @@ div, form {
     margin-top: 20px;
 }
 
-#inputForm {
-    margin-top: 2%;
-}
-
-#result-container {
+#result-container, #responseTextAreaContainer > div {
     margin-top: 5%;
 }
 
@@ -26,4 +22,3 @@ textarea {
     height: auto;
     width: 100%;
 }
-

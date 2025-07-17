@@ -1,7 +1,6 @@
 // Function to update the textarea inner html
 // with the text read from the image uploaded
 /*function updateResponseFragment(){
-
     document.getElementById('inputForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -10,11 +9,9 @@
         fetch('/upload', {
             method: 'POST',
             body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        }).then(response => response.text()).then(html => {
-            document.getElementById('responseTextArea').innerHTML = html;
+        }).then(response => response.text()).then(text => {
+            document.getElementById('responseTextArea').textContent = text;
         });
+        document.getElementById('responseTextArea').style.display = "block";*/
     });
 }*/
